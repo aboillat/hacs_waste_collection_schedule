@@ -40,7 +40,7 @@ class Source:
     def fetch(self) -> List[Collection]:
         entries = []
         with requests.Session() as sess:
-            url = "https://www.wakefield.gov.uk/where-i-live/" # the a parameter is needed for page to load but contents doesn't matter
+            url = "https://www.wakefield.gov.uk/where-i-live/"  # the a parameter is needed for page to load but contents doesn't matter
             request = sess.get(url, params={"uprn": self._uprn, "a": "Your Address"})
             soup = BeautifulSoup(request.content, "html.parser")
             collection_sections = soup.select(".tablet\\:l-col-fb-4.u-mt-10")
@@ -68,5 +68,5 @@ class Source:
                             t=bin_type["alias"],
                             icon=bin_type["icon"],
                         )
-                    )       
+                    )
         return entries
