@@ -22,8 +22,8 @@ TYPES = {
 }
 
 HOW_TO_GET_ARGUMENTS_DESCRIPTION = {  # Optional dictionary to describe how to get the arguments, will be shown in the GUI configuration form above the input fields, does not need to be translated in all languages
-    "en": "Enter your UPRN (available from [FindMyAddress.co.uk](https://www.findmyaddress.co.uk/)). "
-          "Alternatively: you can also see it in the URL/location bar of your browser when you search the Wakefield site manually, look for 'uprn=' in the url and take the numbers immediately after."
+    "en": "Enter your UPRN (available from [FindMyAddress.co.uk](https://www.findmyaddress.co.uk/))."
+    "Alternatively: you can also see it in the URL/location bar of your browser when you search the Wakefield site manually, look for 'uprn=' in the url and take the numbers immediately after."
 }
 
 PARAM_DESCRIPTIONS = {  # Optional dict to describe the arguments, will be shown in the GUI configuration below the respective input field
@@ -40,7 +40,7 @@ class Source:
     def fetch(self) -> List[Collection]:
         entries = []
         with requests.Session() as sess:
-            url = "https://www.wakefield.gov.uk/where-i-live/"
+            url = "https://www.wakefield.gov.uk/where-i-live/" # the a parameter is needed for page to load but contents doesn't matter
             request = sess.get(url, params={"uprn": self._uprn, "a": "Your Address"})
             soup = BeautifulSoup(request.content, "html.parser")
             collection_sections = soup.select(".tablet\\:l-col-fb-4.u-mt-10")
